@@ -1,0 +1,94 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type File {
+  imageUrl: String!
+  taskid: Task!
+}
+
+type Task {
+  Id: Int!
+  title: String!
+  content: String!
+  status: String!
+  priority: String!
+  category: String!
+  due_date: DateTime!
+  create_at: DateTime!
+  updated_at: DateTime
+  user: User!
+  imageid: [File!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type User {
+  """user Id"""
+  Id: Int
+  name: String!
+  email: String!
+  password: String!
+  confirmpassword: String
+  taskId: [Task!]
+}
+
+type CreateAuthInput {
+  user: User!
+  token: String!
+}
+
+type Query {
+  Findusers: [User!]!
+  findTask: [Task!]!
+  findonetask(taskid: Float!): Task!
+  logOut: String!
+}
+
+type Mutation {
+  Createuser(CreateUserInput: CreateUserInput!): User!
+  creat(createTask: CreateTaskInput!): Task!
+  delete(taskid: Float!): String!
+  update(taskid: Float!, updateoptions: UpdateTaskInput!): String!
+  login(CreateUserInput: LoginInput!): CreateAuthInput!
+  uploadfile(image: Upload!, taskid: Int!): File!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  confirmpassword: String!
+}
+
+input CreateTaskInput {
+  title: String!
+  content: String!
+  status: String
+  priority: String
+  category: String
+  due_date: DateTime!
+  create_at: DateTime
+}
+
+input UpdateTaskInput {
+  title: String
+  content: String
+  status: String
+  priority: String
+  category: String
+  due_date: DateTime
+  create_at: DateTime
+  updated_at: DateTime
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
