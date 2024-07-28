@@ -9,7 +9,6 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { FileModule } from './file/file.module';
 import { ConfigModule } from '@nestjs/config';
 import { Request,Response } from 'express';
-import { GregModule } from './greg/greg.module';
 
 @Module({
   imports: [
@@ -29,7 +28,7 @@ import { GregModule } from './greg/greg.module';
       installSubscriptionHandlers:true
     }),
     FileModule,
-    GregModule,
+    
   ],
 
 })
